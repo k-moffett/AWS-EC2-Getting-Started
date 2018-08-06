@@ -1,26 +1,40 @@
 # AWS-EC2-Getting-Started
 This is a quick guide to get started with an AWS EC2 instance using an AWS TC2, Node.js, Nginx, npm, as well as two npm packages express, and pm2. 
 ## Technologies Used
--AWS TC2 instance: <br>
+-AWS TC2 instance: 
+<br>
 Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-a4dc46d 
+<br>
 -node.js 
-https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
+<br>
+https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions 
+<br>
 -nginx 
+<br>
 https://nginx.org/en/docs/ 
+<br>
 https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04 
+<br>
 -npm 
-https://www.npmjs.com/package/npm
--express
-https://www.npmjs.com/package/express
+<br>
+https://www.npmjs.com/package/npm 
+<br>
+-express 
+<br>
+https://www.npmjs.com/package/express 
+<br>
 -pm2 
-https://www.npmjs.com/package/pm2
+<br>
+https://www.npmjs.com/package/pm2 
+<br>
 ## Provisioning an EC2
--Go to your AWS console and launch a new instance. 
--Select "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-a4dc46db" as your Amazon Machine Image (AMI)
--Select t2.micro as an instance type 
--Under "Configure Security Group", add HTTP and HTTPS rules. Set "Source" for all rules to "Anywhere".
+-Go to your AWS console and launch a new instance. <br>
+-Select "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-a4dc46db" as your Amazon Machine Image (AMI). <br>
+-Select t2.micro as an instance type. <br>
+-Under "Configure Security Group", add HTTP and HTTPS rules. Set "Source" for all rules to "Anywhere". <br>
 -Click "Review and Launch", then click "Launch". Then create a new key pair and save it somewhere you can easily access it. You will use this to ssh into your VM. Then click "Luanch Instances". 
-*Now your instance is running*
+<br>
+*Now your instance is running* <br>
 ## Accessing your instance remotely
 You will need to use ssh to get into your instance. If you are on a Mac, you should be good to go. If you are on Windows you will need to install ssh. Here is a link for a guide to do that: https://winscp.net/eng/docs/guide_windows_openssh_server
 -cd into the file you saved your key pair in. 
@@ -66,7 +80,8 @@ sudo systemctl start nginx
 Make sure that Nginx will run on system startup by using command below: 
 ```
 sudo systemctl enable nginx
-```
+``` 
+<br>
 *Nginx should now be running*
 ## Setting up Nginx as a reverse proxy for express
 Here is a link to their actual documentation:
@@ -92,6 +107,7 @@ server {
      }
 }
 ```
+<br>
 ***Replace [url for your ec2 instance] with your ec2 domain name and [your private ip] with the private ip address associated with your EC2***
 Test the configuration of Nginx using the command below: 
 ```
@@ -101,9 +117,11 @@ Then reload Nginx if OK is displayed with this command:
 ```
 sudo /etc/init.d/nginx reload
 ```
+<br>
 *Nginx is now configured*
 ## Create a Simple Node/Express server
 Inside of you EC2, run these commands to create a directory called "app", initialize npm, and install express:
+<br>
 *Just leave everything the way it is when you initilize npm by hitting enter for each question.*
 ```
 mkdir app
@@ -131,6 +149,7 @@ Use the following command to run your server:
 ```
 node server.js
 ```
+<br>
 *Visit your EC2's domain, you should see "Hello World" now. *
 ## Installing pm2 and runing your Express server with it
 Install pm2 with the following command: 
@@ -141,7 +160,9 @@ Run your application using pm2 to make sure your application runs automatically 
 ```
 pm2 start server.js
 ```
-***Now you have set up a reverse proxy for your Express server using Nginx. pm2 will ensure that your server continues to run even if it restarts***
+<br>
+***Now you have set up a reverse proxy for your Express server using Nginx. pm2 will ensure that your server continues to run even if it restarts*** 
+<br>
 ***Don't forget to stop your EC2 instance when you are't using it.***
 You can do this by visiting your AWS account's "Instance's" tab. Here you can see all of your instances. Right click on and instance and select "Instance State" then "stop" to stop the instance. You can start an instance again by right clicking on it and selecting "Instance State" then "Start".
 ## You should now be good to go!
