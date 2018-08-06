@@ -85,8 +85,11 @@ sudo systemctl enable nginx
 *Nginx should now be running*
 ## Setting up Nginx as a reverse proxy for express
 Here is a link to their actual documentation:
+<br>
 https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
-Get the private ip address as well as the public URL of your instance by visiting your EC2 under the "Instances" tab on AWS. 
+<br>
+Get the private ip address as well as the public URL of your instance by visiting your EC2 under the "Instances" tab on AWS.
+<br>
 Remove and add default file to sites-available by using following commands: 
 ```
 sudo rm /etc/nginx/sites-available/default
