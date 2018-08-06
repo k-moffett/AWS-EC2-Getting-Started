@@ -82,7 +82,9 @@ Make sure that Nginx will run on system startup by using command below:
 sudo systemctl enable nginx
 ``` 
 <br>
+
 *Nginx should now be running*
+
 ## Setting up Nginx as a reverse proxy for express
 Here is a link to their actual documentation:
 <br>
