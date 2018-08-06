@@ -90,12 +90,15 @@ https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
 <br>
 Get the private ip address as well as the public URL of your instance by visiting your EC2 under the "Instances" tab on AWS.
 <br>
-Remove and add default file to sites-available by using following commands: 
+Remove and add default file to sites-available by using following commands:
+
 ```
 sudo rm /etc/nginx/sites-available/default
 sudo vi /etc/nginx/sites-available/default
 ```
-This will open the file in Vim. Now add this code to that file: 
+
+This will open the file in Vim. Now add this code to that file:
+
 ```
 server {
     listen 80;
@@ -110,6 +113,7 @@ server {
      }
 }
 ```
+
 <br>
 ***Replace [url for your ec2 instance] with your ec2 domain name and [your private ip] with the private ip address associated with your EC2***
 Test the configuration of Nginx using the command below: 
