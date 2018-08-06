@@ -1,7 +1,7 @@
 # AWS-EC2-Getting-Started
 This is a quick guide to get started with an AWS EC2 instance using an AWS TC2, Node.js, Nginx, npm, as well as two npm packages express, and pm2. 
 ## Technologies Used
--AWS TC2 instance: 
+-AWS TC2 instance: <br>
 Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-a4dc46d 
 -node.js 
 https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
