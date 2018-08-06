@@ -117,7 +117,9 @@ server {
 ```
 
 <br>
+
 ***Replace [url for your ec2 instance] with your ec2 domain name and [your private ip] with the private ip address associated with your EC2***
+
 Test the configuration of Nginx using the command below: 
 ```
 sudo nginx -t
@@ -127,22 +129,29 @@ Then reload Nginx if OK is displayed with this command:
 sudo /etc/init.d/nginx reload
 ```
 <br>
+
 *Nginx is now configured*
+
 ## Create a Simple Node/Express server
 Inside of you EC2, run these commands to create a directory called "app", initialize npm, and install express:
 <br>
+
 *Just leave everything the way it is when you initilize npm by hitting enter for each question.*
+
 ```
 mkdir app
 cd app
 npm init
 npm i express
 ```
+
 Create and open a new server.js file in VIM using this command:
+
 ```
 vi server.js
 ```
 Here is a basic express server that you can enter into this file:
+
 ```
 const express = require('express');
 const app = express();
@@ -153,15 +162,21 @@ app.get('/', function(req, res){
 
 app.listen(8080, 'private_ip_address');
 ```
+
 ***Replace private_ip_address with your private ip address.***
+
 Use the following command to run your server: 
+
 ```
 node server.js
 ```
+
 <br>
 *Visit your EC2's domain, you should see "Hello World" now. *
+
 ## Installing pm2 and runing your Express server with it
 Install pm2 with the following command: 
+
 ```
 sudo npm install pm2 -g
 ```
@@ -169,9 +184,14 @@ Run your application using pm2 to make sure your application runs automatically 
 ```
 pm2 start server.js
 ```
+
 <br>
+
 ***Now you have set up a reverse proxy for your Express server using Nginx. pm2 will ensure that your server continues to run even if it restarts*** 
+
 <br>
+
 ***Don't forget to stop your EC2 instance when you are't using it.***
+
 You can do this by visiting your AWS account's "Instance's" tab. Here you can see all of your instances. Right click on and instance and select "Instance State" then "stop" to stop the instance. You can start an instance again by right clicking on it and selecting "Instance State" then "Start".
 ## You should now be good to go!
