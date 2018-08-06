@@ -27,38 +27,59 @@ You will need to use ssh to get into your instance. If you are on a Mac, you sho
 -Use the chmod command to make sure your private key file isn't publicly viewable. For example, if the name of your private key file is my-key-pair.pem, use the following command: 
 ```chmod 400 my-key-pair.pem```
 Now use the following SSH command to connect to the instance:
-```ssh -i /my-key-pair.pem ubuntu@public_dns_name```
+```
+ssh -i /my-key-pair.pem ubuntu@public_dns_name
+```
 You will be asked "Are you sure you want to continue connecting (yes/no)?", enter "yes".
 *You are now within your AWS EC2*
 You will want to check for and install any updates. You can do that with this command in your EC2:
-```sudo apt-get update && sudo apt-get upgrade -y```
+```
+sudo apt-get update && sudo apt-get upgrade -y
+```
 ## Installing Node
 Install node and npm using these commands: 
-```curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-sudo apt-get install -y nodejs```
+```
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
 Check node and npm verions with these commands: 
-```node --version```
-```npm --version```
+```
+node --version
+```
+```
+npm --version
+```
 ## Installing Nginx
 Run this command to install nginx: 
-```sudo apt-get install nginx -y```
+```
+sudo apt-get install nginx -y
+```
 Check status of Nginx and start it using the following commands: 
 To check the status of nginx: 
-```sudo systemctl status nginx  ```
+```
+sudo systemctl status nginx  
+```
 To start nginx: 
-```sudo systemctl start nginx ```
+```
+sudo systemctl start nginx 
+```
 Make sure that Nginx will run on system startup by using command below: 
-```sudo systemctl enable nginx```
+```
+sudo systemctl enable nginx
+```
 *Nginx should now be running*
 ## Setting up Nginx as a reverse proxy for express
 Here is a link to their actual documentation:
 https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
 Get the private ip address as well as the public URL of your instance by visiting your EC2 under the "Instances" tab on AWS. 
 Remove and add default file to sites-available by using following commands: 
-```sudo rm /etc/nginx/sites-available/default
-sudo vi /etc/nginx/sites-available/default```
+```
+sudo rm /etc/nginx/sites-available/default
+sudo vi /etc/nginx/sites-available/default
+```
 This will open the file in Vim. Now add this code to that file: 
-```server {
+```
+server {
     listen 80;
     server_name [url for your ec2 instance];
     location / {
@@ -69,40 +90,57 @@ This will open the file in Vim. Now add this code to that file:
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
      }
-}```
+}
+```
 ***Replace [url for your ec2 instance] with your ec2 domain name and [your private ip] with the private ip address associated with your EC2***
 Test the configuration of Nginx using the command below: 
-```sudo nginx -t```
+```
+sudo nginx -t
+```
 Then reload Nginx if OK is displayed with this command:
-```sudo /etc/init.d/nginx reload```
+```
+sudo /etc/init.d/nginx reload
+```
 *Nginx is now configured*
 ## Create a Simple Node/Express server
 Inside of you EC2, run these commands to create a directory called "app", initialize npm, and install express:
 *Just leave everything the way it is when you initilize npm by hitting enter for each question.*
-```mkdir app
+```
+mkdir app
 cd app
 npm init
-npm i express```
+npm i express
+```
 Create and open a new server.js file in VIM using this command:
-```vi server.js```
+```
+vi server.js
+```
 Here is a basic express server that you can enter into this file:
-```const express = require('express');
+```
+const express = require('express');
 const app = express();
 
 app.get('/', function(req, res){
    res.send("Hello World!");
 });
 
-app.listen(8080, 'private_ip_address');```
+app.listen(8080, 'private_ip_address');
+```
 ***Replace private_ip_address with your private ip address.***
 Use the following command to run your server: 
-```node server.js```
+```
+node server.js
+```
 *Visit your EC2's domain, you should see "Hello World" now. *
 ## Installing pm2 and runing your Express server with it
 Install pm2 with the following command: 
-```sudo npm install pm2 -g```
+```
+sudo npm install pm2 -g
+```
 Run your application using pm2 to make sure your application runs automatically when the server restarts with this command:
-```pm2 start server.js```
+```
+pm2 start server.js
+```
 ***Now you have set up a reverse proxy for your Express server using Nginx. pm2 will ensure that your server continues to run even if it restarts***
 ***Don't forget to stop your EC2 instance when you are't using it.***
 You can do this by visiting your AWS account's "Instance's" tab. Here you can see all of your instances. Right click on and instance and select "Instance State" then "stop" to stop the instance. You can start an instance again by right clicking on it and selecting "Instance State" then "Start".
