@@ -36,22 +36,35 @@ https://www.npmjs.com/package/pm2
 <br>
 *Now your instance is running* <br>
 ## Accessing your instance remotely
-You will need to use ssh to get into your instance. If you are on a Mac, you should be good to go. If you are on Windows you will need to install ssh. Here is a link for a guide to do that: https://winscp.net/eng/docs/guide_windows_openssh_server
+You will need to use ssh to get into your instance. If you are on a Mac, you should be good to go. If you are on Windows you will need to install ssh. Here is a link for a guide to do that:
+<br>
+https://winscp.net/eng/docs/guide_windows_openssh_server
+<br>
 -cd into the file you saved your key pair in. 
+<br>
 -Use the chmod command to make sure your private key file isn't publicly viewable. For example, if the name of your private key file is my-key-pair.pem, use the following command: 
-```chmod 400 my-key-pair.pem```
+
+```
+chmod 400 my-key-pair.pem
+```
+
 Now use the following SSH command to connect to the instance:
+
 ```
 ssh -i /my-key-pair.pem ubuntu@public_dns_name
 ```
+
 You will be asked "Are you sure you want to continue connecting (yes/no)?", enter "yes".
 *You are now within your AWS EC2*
 You will want to check for and install any updates. You can do that with this command in your EC2:
+
 ```
 sudo apt-get update && sudo apt-get upgrade -y
 ```
+
 ## Installing Node
 Install node and npm using these commands: 
+
 ```
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
