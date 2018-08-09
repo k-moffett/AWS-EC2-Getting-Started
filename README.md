@@ -55,7 +55,9 @@ ssh -i /my-key-pair.pem ubuntu@public_dns_name
 ```
 
 You will be asked "Are you sure you want to continue connecting (yes/no)?", enter "yes".
+<br>
 *You are now within your AWS EC2*
+<br>
 You will want to check for and install any updates. You can do that with this command in your EC2:
 
 ```
@@ -81,7 +83,8 @@ Run this command to install nginx:
 ```
 sudo apt-get install nginx -y
 ```
-Check status of Nginx and start it using the following commands: 
+Check status of Nginx and start it using the following commands:
+<br>
 To check the status of nginx: 
 ```
 sudo systemctl status nginx  
